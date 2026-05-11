@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `pokemons`
 --
-
+DROP TABLE IF EXISTS `pokemons`;
 CREATE TABLE `pokemons` (
   `id` int(11) NOT NULL,
   `numero_id` int(11) NOT NULL,
@@ -46,23 +46,23 @@ CREATE TABLE `pokemons` (
 --
 
 INSERT INTO `pokemons` (`id`, `numero_id`, `nombre`, `tipo`, `descripcion`, `imagen_ruta`, `altura_m`, `peso_kg`, `habitat`, `color`, `habilidad`) VALUES
-(1, 1, 'Bulbasaur', 'planta', 'Tiene una semilla en su espalda que crece junto a él.', 'uploads/bulbasaur.jpg', 0.7, 6.9, 'bosque', 'verde', 'Espesura'),
-(2, 4, 'Charmander', 'fuego', 'La llama de su cola refleja su estado de salud y energía.', 'uploads/charmander.jpg', 0.6, 8.5, 'montaña', 'rojo', 'Mar Llamas'),
-(3, 7, 'Squirtle', 'agua', 'Dispara agua a alta presión con gran precisión.', 'uploads/squirtle.jpg', 0.5, 9.0, 'mar', 'azul', 'Torrente'),
-(4, 25, 'Pikachu', 'electrico', 'Almacena electricidad en las bolsas de sus mejillas.', 'uploads/pikachu.jpg', 0.4, 6.0, 'bosque', 'amarillo', 'Electricidad Estática'),
-(5, 54, 'Psyduck', 'agua', 'Sufre constantes jaquecas que despiertan sus poderes psíquicos.', 'uploads/psyduck.jpg', 0.8, 19.6, 'río', 'amarillo', 'Humedad'),
-(6, 63, 'Abra', 'psiquico', 'Duerme 18 horas al día pero puede usar telepatía dormido.', 'uploads/abra.jpg', 0.9, 19.5, 'ciudad', 'marrón', 'Sincronía'),
-(7, 94, 'Gengar', 'siniestro', 'Se esconde en las sombras y baja la temperatura del lugar.', 'uploads/gengar.jpg', 1.5, 40.5, 'ciudad', 'morado', 'Levitación'),
-(8, 116, 'Horsea', 'agua', 'Nada enroscando su cola y lanza tinta para escapar.', 'uploads/horsea.jpg', 0.4, 8.0, 'mar', 'azul', 'Nado Rápido'),
-(9, 147, 'Dratini', 'dragon', 'Muda su piel constantemente mientras acumula energía.', 'uploads/dratini.jpg', 1.8, 3.3, 'río', 'azul', 'Manto'),
-(10, 246, 'Larvitar', 'siniestro', 'Come tierra y roca hasta hundirse bajo la montaña.', 'uploads/larvitar.jpg', 0.6, 72.0, 'montaña', 'verde', 'Cuerpo Roca');
+(1, 1, 'Bulbasaur', 'planta', 'Tiene una semilla en su espalda que crece junto a él.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png', 0.7, 6.9, 'bosque', 'verde', 'Espesura'),
+(2, 4, 'Charmander', 'fuego', 'La llama de su cola refleja su estado de salud y energía.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png', 0.6, 8.5, 'montaña', 'rojo', 'Mar Llamas'),
+(3, 7, 'Squirtle', 'agua', 'Dispara agua a alta presión con gran precisión.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png', 0.5, 9.0, 'mar', 'azul', 'Torrente'),
+(4, 25, 'Pikachu', 'electrico', 'Almacena electricidad en las bolsas de sus mejillas.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png', 0.4, 6.0, 'bosque', 'amarillo', 'Electricidad Estática'),
+(5, 54, 'Psyduck', 'agua', 'Sufre constantes jaquecas que despiertan sus poderes psíquicos.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png', 0.8, 19.6, 'río', 'amarillo', 'Humedad'),
+(6, 63, 'Abra', 'psiquico', 'Duerme 18 horas al día pero puede usar telepatía dormido.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/63.png', 0.9, 19.5, 'ciudad', 'marrón', 'Sincronía'),
+(7, 94, 'Gengar', 'siniestro', 'Se esconde en las sombras y baja la temperatura del lugar.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png', 1.5, 40.5, 'ciudad', 'morado', 'Levitación'),
+(8, 116, 'Horsea', 'agua', 'Nada enroscando su cola y lanza tinta para escapar.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/116.png', 0.4, 8.0, 'mar', 'azul', 'Nado Rápido'),
+(9, 147, 'Dratini', 'dragon', 'Muda su piel constantemente mientras acumula energía.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/147.png', 1.8, 3.3, 'río', 'azul', 'Manto'),
+(10, 246, 'Larvitar', 'siniestro', 'Come tierra y roca hasta hundirse bajo la montaña.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/246.png', 0.6, 72.0, 'montaña', 'verde', 'Cuerpo Roca');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
-
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `usuario` varchar(50) NOT NULL,
