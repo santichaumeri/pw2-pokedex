@@ -1,7 +1,7 @@
 <?php
 
 require_once 'db.php';
-
+/** @var mysqli $conexion */
 $resultado = $conexion->query("SELECT * FROM pokemons ORDER BY numero_id ASC");
 
 $iconosTipos = [
