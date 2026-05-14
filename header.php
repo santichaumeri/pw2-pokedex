@@ -486,7 +486,11 @@ if (session_status() === PHP_SESSION_NONE) {
         <nav class="pokedex-nav">
             <?php if (isset($_SESSION['admin'])): ?>
                 <span class="admin-badge">ADMIN</span>
-                <a href="alta.php" class="nav-btn nav-btn-primary">+ Agregar</a>
+                <?php if (basename($_SERVER['PHP_SELF']) == 'alta.php'): ?>
+                    <a href="index.php" class="nav-btn nav-btn-primary">Volver a la Pokédex</a>
+                <?php else: ?>
+                    <a href="alta.php" class="nav-btn nav-btn-primary">+ Agregar</a>
+                <?php endif; ?>
                 <a href="logout.php" class="nav-btn nav-btn-danger">Salir</a>
             <?php else: ?>
                 <a href="index.php" class="nav-btn nav-btn-outline">Inicio</a>
@@ -496,16 +500,16 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
     <!-- Barra de búsqueda -->
-    <form action="index.php" method="GET" class="search-bar">
-        <input
-            type="text"
-            name="search"
-            class="search-input"
-            placeholder="Buscar Pokémon..."
-            value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>"
-        >
-        <button type="submit" class="search-btn">Buscar</button>
-    </form>
+<!--    <form action="index.php" method="GET" class="search-bar">-->
+<!--        <input-->
+<!--            type="text"-->
+<!--            name="search"-->
+<!--            class="search-input"-->
+<!--            placeholder="Buscar Pokémon..."-->
+<!--            value="--><?php //= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?><!--"-->
+<!--        >-->
+<!--        <button type="submit" class="search-btn">Buscar</button>-->
+<!--    </form>-->
 </header>
 
 <div class="main-content">

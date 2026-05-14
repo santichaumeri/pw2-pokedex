@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once 'db.php';
 
 if (!isset($_GET['id'])) {
@@ -10,11 +10,8 @@ if (!isset($_GET['id'])) {
 $id = $_GET['id'];
 
 $statement = $conexion->prepare("SELECT * FROM pokemons WHERE id=?");
-
 $statement->bind_param("i", $id);
-
 $statement->execute();
-
 $resultado = $statement->get_result();
 
 if ($resultado->num_rows === 0) {
@@ -23,10 +20,7 @@ if ($resultado->num_rows === 0) {
     exit();
 }
 
-
 $pokemon = $resultado->fetch_assoc();
-
-//echo $pokemon['nombre'];
 
 $iconosTipos = [
         'planta' => 'Grass.ico',
@@ -37,110 +31,143 @@ $iconosTipos = [
         'siniestro' => 'Ghost.ico',
         'dragon' => 'Dragon.ico',
 ];
+
+include 'header.php';
 ?>
 
-    <!doctype html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Detalle del Pokémon</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body class="bg-light">
+    <style>
+        .detalle-wrapper {
+            max-width: 860px;
+            margin: 0 auto;
+        }
 
-    <main class="container mt-5">
+        .detalle-card {
+            background: #16213e;
+            border: 2px solid #0f3460;
+            border-radius: 20px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
 
+        @media (max-width: 600px) {
+            .detalle-card { grid-template-columns: 1fr; }
+        }
 
-        <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        .detalle-imagen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: #0f1b35;
+        }
 
-            <div class="row g-0">
+        .detalle-imagen img {
+            max-height: 280px;
+            object-fit: contain;
+            width: 100%;
+        }
 
-                <div class="col-md-6 d-flex justify-content-center align-items-center p-4 bg-white">
+        .detalle-info {
+            padding: 36px;
+        }
 
-                    <img src="<?php echo htmlspecialchars($pokemon['imagen_ruta']); ?>"
-                         class="img-fluid"
-                         alt="<?php echo htmlspecialchars($pokemon['nombre']); ?>"
-                         style="max-height: 400px; object-fit: contain;">
+        .detalle-info h1 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 16px;
+            color: #fff;
+            text-transform: capitalize;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
 
+        .detalle-info h5 {
+            font-size: 11px;
+            color: #555;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            margin-top: 16px;
+        }
 
-                </div>
+        .detalle-info p {
+            font-size: 15px;
+            color: #ddd;
+            font-weight: 700;
+            margin: 0;
+        }
 
-                <div class="col-md-6 bg-light">
-                    <div class="card-body p-5">
+        .detalle-info hr {
+            border: none;
+            border-top: 1px solid #0f3460;
+            margin: 20px 0;
+        }
 
-                        <h1 class="card-title text-capitalize fw-bold mb-4" style="color: #2c3e50;">
-                            <?php echo htmlspecialchars($pokemon['nombre']); ?>
-                        </h1>
+        .detalle-info .btn-volver {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 10px 22px;
+            background: transparent;
+            border: 2px solid #555;
+            border-radius: 10px;
+            color: #eee;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
 
-                        <div class="mb-4">
-                            <h5 class="text-muted mb-2">Tipo</h5>
-                            <img src="assets/tipos/<?php echo htmlspecialchars($iconosTipos[$pokemon['tipo']]); ?>"
-                                 width="35">
-                        </div>
+        .detalle-info .btn-volver:hover {
+            border-color: #eee;
+            color: #fff;
+        }
+    </style>
 
-                        <hr>
+    <div class="detalle-wrapper">
+        <div class="detalle-card">
 
-                        <div class="mb-4 mt-4">
-                            <h5 class="text-muted mb-3">Id</h5>
-                            <p class="card-text fs-5">
-                                <?php echo htmlspecialchars($pokemon['id']); ?>
-                            </p>
-                        </div>
+            <div class="detalle-imagen">
+                <img src="<?php echo htmlspecialchars($pokemon['imagen_ruta']); ?>"
+                     alt="<?php echo htmlspecialchars($pokemon['nombre']); ?>">
+            </div>
 
-                        <div class="mb-4 mt-4">
-                            <h5 class="text-muted mb-3">Número Id</h5>
-                            <p class="card-text fs-5">
-                                <?php echo htmlspecialchars($pokemon['numero_id']); ?>
-                            </p>
-                        </div>
+            <div class="detalle-info">
 
-                        <div class="mb-4 mt-4">
-                            <h5 class="text-muted mb-3">Descripción</h5>
-                            <p class="card-text fs-5">
-                                <?php echo htmlspecialchars($pokemon['descripcion']); ?>
-                            </p>
-                        </div>
+                <h1><?php echo htmlspecialchars($pokemon['nombre']); ?></h1>
 
-                        <div class="mb-4 mt-4">
-                            <h5 class="text-muted mb-3">Habitat</h5>
-                            <p class="card-text fs-5">
-                                <?php echo htmlspecialchars($pokemon['habitat']); ?>
-                            </p>
-                        </div>
+                <h5>Tipo</h5>
+                <img src="assets/tipos/<?php echo htmlspecialchars($iconosTipos[$pokemon['tipo']]); ?>" width="35">
 
-                        <div class="mb-4 mt-4">
-                            <h5 class="text-muted mb-3">Peso</h5>
-                            <p class="card-text fs-5">
-                                <?php echo htmlspecialchars($pokemon['peso_kg']) . " KG" ?>
-                            </p>
-                        </div>
+                <hr>
 
-                        <div class="mb-4 mt-4">
-                            <h5 class="text-muted mb-3">Altura</h5>
-                            <p class="card-text fs-5">
-                                <?php echo htmlspecialchars($pokemon['altura_m']) . " CM" ?>
-                            </p>
-                        </div>
+                <h5>Id</h5>
+                <p><?php echo htmlspecialchars($pokemon['id']); ?></p>
 
+                <h5>Número en Pokédex</h5>
+                <p><?php echo htmlspecialchars($pokemon['numero_id']); ?></p>
 
-                        <div class="mt-5">
-                            <a href="index.php" class="btn btn-outline-secondary btn-lg px-4">Volver a la Pokédex</a>
-                        </div>
+                <h5>Descripción</h5>
+                <p style="font-weight:400; color:#aaa; font-size:14px; line-height:1.7;"><?php echo htmlspecialchars($pokemon['descripcion']); ?></p>
 
-                    </div>
-                </div>
+                <h5>Habitat</h5>
+                <p><?php echo htmlspecialchars($pokemon['habitat']); ?></p>
+
+                <h5>Peso</h5>
+                <p><?php echo htmlspecialchars($pokemon['peso_kg']) . " KG"; ?></p>
+
+                <h5>Altura</h5>
+                <p><?php echo htmlspecialchars($pokemon['altura_m']) . " MTS"; ?></p>
+
+                <a href="index.php" class="btn-volver">← Volver a la Pokédex</a>
 
             </div>
         </div>
-
-    </main>
-
-    </body>
-    </html>
+    </div>
 
 <?php
 $statement->close();
 $conexion->close();
+include 'footer.php';
 ?>
