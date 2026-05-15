@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'db.php';
 /** @var mysqli $conexion */
 $resultado = $conexion->query("SELECT * FROM pokemons ORDER BY numero_id ASC");
@@ -12,6 +11,8 @@ $iconosTipos = [
         'psiquico' => 'Psychic.ico',
         'siniestro' => 'Ghost.ico',
         'dragon' => 'Dragon.ico',
+        'hielo' => 'Ice.ico',
+        'venero' => 'Poison.ico',
 ];
 
 

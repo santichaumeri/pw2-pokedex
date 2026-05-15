@@ -1,8 +1,14 @@
 <?php
-session_start();
 require_once "db.php";
 /** @var mysqli $conexion */
+
+if (isset($_SESSION["admin"])) {
+    header('Location: index.php');
+    exit();
+}
+
 $error = null;
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 

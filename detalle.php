@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'db.php';
 
 if (!isset($_GET['id'])) {
@@ -30,6 +29,8 @@ $iconosTipos = [
         'psiquico' => 'Psychic.ico',
         'siniestro' => 'Ghost.ico',
         'dragon' => 'Dragon.ico',
+        'hielo' => 'Ice.ico',
+        'venero' => 'Poison.ico',
 ];
 
 include 'header.php';
